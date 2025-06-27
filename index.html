@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eduardo Revenga Saiz - Product Owner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: #2c3e50;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #3498db;
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+        }
+        
+        .section {
+            min-height: 100vh;
+            padding: 60px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+        
+        .hero .description {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 1s ease 0.9s both;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        /* About Section */
+        .about {
+            background: white;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: white;
+            margin: 0 auto;
+        }
+        
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+        
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+        
+        .skills-highlight {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .skill-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #3498db;
+        }
+        
+        .skill-card h4 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Experience Section */
+        .experience {
+            background: #f8f9fa;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: #3498db;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background: inherit;
+            width: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background: #3498db;
+            border-radius: 50%;
+            top: 15px;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .right::after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background: white;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-content h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-content .company {
+            color: #3498db;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-content .date {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .timeline-content ul li {
+            margin-bottom: 0.5rem;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .timeline-content ul li::before {
+            content: "▶";
+            color: #3498db;
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+        
+        /* Portfolio Section */
+        .portfolio {
+            background: white;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .portfolio-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .portfolio-card-header {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .portfolio-card-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .portfolio-card-content {
+            padding: 2rem;
+        }
+        
+        .achievement {
+            background: #e8f5e8;
+            border-left: 4px solid #27ae60;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .achievement .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #27ae60;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background: #2c3e50;
+            color: white;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .contact-item .icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: #3498db;
+        }
+        
+        .contact-form {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ecf0f1;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.9);
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+            
+            .right {
+                left: 0%;
+            }
+            
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Eduardo Revenga</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="active">Inicio</a></li>
+                <li><a href="#about">Sobre mí</a></li>
+                <li><a href="#experience">Experiencia</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="section hero">
+            <div class="container">
+                <h1>Eduardo Revenga Saiz</h1>
+                <p class="subtitle">Product Owner & Digital Transformation Specialist</p>
+                <p class="description">
+                    Más de 15 años transformando organizaciones a través de metodologías Agile, 
+                    análisis de datos y liderazgo de equipos. Especializado en digitalización 
+                    de procesos y entrega de productos que generan valor real al negocio.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Contáctame</a>
+                    <a href="#portfolio" class="btn btn-secondary">Ver Portfolio</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="profile-image">ER</div>
+                    <div class="about-text">
+                        <h2>Sobre mí</h2>
+                        <p>
+                            Soy un Product Owner apasionado por la transformación digital con más de 15 años 
+                            de experiencia en gestión de proyectos, análisis de datos y optimización de procesos. 
+                            He trabajado en entornos internacionales para empresas como The Chemours Company, 
+                            Axalta Coating Systems y DuPont.
+                        </p>
+                        <p>
+                            Mi enfoque se centra en traducir las necesidades del negocio en soluciones tecnológicas 
+                            efectivas, utilizando metodologías Agile para entregar resultados medibles. He liderado 
+                            proyectos que han generado ahorros significativos, mejoras de eficiencia del 80% y 
+                            reducción de tiempos de proceso del 90% al 20%.
+                        </p>
+                        <p>
+                            Me apasiona ayudar a las organizaciones en su digitalización a través de la tecnología, 
+                            la mejora continua y la entrega iterativa de resultados que impactan directamente 
+                            en el bottom line del negocio.
+                        </p>
+                        
+                        <div class="skills-highlight">
+                            <div class="skill-card">
+                                <h4>Metodologías Agile</h4>
+                                <p>Scrum, Sprint Planning, Backlog Management</p>
+                            </div>
+                            <div class="skill-card">
+                                <h4>Liderazgo</h4>
+                                <p>Gestión de equipos transversales de hasta 8 personas</p>
+                            </div>
+                            <div class="skill-card">
+                                <h4>Análisis de Datos</h4>
+                                <p>Power BI, SQL, Business Intelligence</p>
+                            </div>
+                            <div class="skill-card">
+                                <h4>Idiomas</h4>
+                                <p>Español (Nativo), Inglés (C2), Alemán (B2)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="section experience">
+            <div class="container">
+                <h2 class="section-title">Experiencia Profesional</h2>
+                <div class="timeline">
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Especialista</h3>
+                            <div class="company">Apple Retail</div>
+                            <div class="date">Octubre 2024 – Enero 2025</div>
+                            <ul>
+                                <li>Atención de excelencia a clientes con enfoque en crear propietarios</li>
+                                <li>Transferencia de conocimiento entre equipos sobre productos y servicios</li>
+                                <li>Seguimiento preciso de procesos y pautas de ventas</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>Client Relationship Manager</h3>
+                            <div class="company">Data2Logistics</div>
+                            <div class="date">Octubre 2022 – Noviembre 2022</div>
+                            <ul>
+                                <li>Gestión de cartera de clientes internacionales (+1.000 M€ facturación)</li>
+                                <li>Creación de indicadores e informes para toma de decisiones basada en datos</li>
+                                <li>Mantenimiento de relaciones efectivas y constructivas con clientes</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Product Owner</h3>
+                            <div class="company">The Chemours Company</div>
+                            <div class="date">Febrero 2021 – Noviembre 2021</div>
+                            <ul>
+                                <li>Diseño de Caso de Negocio que ahorró 2 FTE's al equipo</li>
+                                <li>Creación de estrategia y visión del producto "Proceso Global de Auditoría de Costes Logísticos"</li>
+                                <li>Mejoras en procesos EDI que redujeron 80% el tiempo de auditoría</li>
+                                <li>Gestión completa de backlog, sprints, stand-ups y retrospectivas</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>Director Global de Cuentas a Pagar</h3>
+                            <div class="company">The Chemours Company</div>
+                            <div class="date">Febrero 2019 – Enero 2021</div>
+                            <ul>
+                                <li>Liderazgo de equipo de 8 personas</li>
+                                <li>Reducción de retrasos en pagos del 90% al 20%</li>
+                                <li>Mejoras en procesos de cierre contable mensual</li>
+                                <li>Creación de KPIs para evaluación de eficiencia del equipo</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Responsable de Auditoría de Costes de Transporte</h3>
+                            <div class="company">Axalta Coating Systems</div>
+                            <div class="date">Mayo 2014 – Enero 2019</div>
+                            <ul>
+                                <li>Gestión de proyecto de implantación de software de auditoría</li>
+                                <li>Creación de informes de Business Intelligence para Dirección de Logística</li>
+                                <li>Implementación de cumplimiento RGPD</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="section portfolio">
+            <div class="container">
+                <h2 class="section-title">Portfolio & Logros Destacados</h2>
+                <div class="portfolio-grid">
+                    <div class="portfolio-card">
+                        <div class="portfolio-card-header">
+                            <h3>Optimización de Procesos de Auditoría</h3>
+                            <p>The Chemours Company</p>
+                        </div>
+                        <div class="portfolio-card-content">
+                            <p>Diseño e implementación de un sistema global de auditoría de costes logísticos que transformó la eficiencia operacional.</p>
+                            
+                            <div class="achievement">
+                                <div class="number">2 FTE's</div>
+                                <p>Ahorro en recursos humanos equivalente a 2 empleados a tiempo completo</p>
+                            </div>
+                            
+                            <div class="achievement">
+                                <div class="number">80%</div>
+                                <p>Reducción en tiempo de auditoría mediante mejoras en procesos EDI</p>
+                            </div>
+                            
+                            <p><strong>Tecnologías:</strong> SAP, EDI, XML, TMS</p>
+                            <p><strong>Metodología:</strong> Agile/Scrum, User Stories, Sprint Planning</p>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-card">
+                        <div class="portfolio-card-header">
+                            <h3>Transformación de Cuentas a Pagar</h3>
+                            <p>Liderazgo de Equipos</p>
+                        </div>
+                        <div class="portfolio-card-content">
+                            <p>Liderazgo y restructuración de equipo de 8 personas para optimizar procesos de pagos a transportistas.</p>
+                            
+                            <div class="achievement">
+                                <div class="number">90% → 20%</div>
+                                <p>Reducción dramática en retrasos de pagos a transportistas en el primer año</p>
+                            </div>
+                            
+                            <div class="achievement">
+                                <div class="number">100%</div>
+                                <p>Puntualidad en entrega de cuentas contables mensuales</p>
+                            </div>
+                            
+                            <p><strong>Skills aplicados:</strong> Liderazgo, KPIs, Reporting, Mejora continua</p>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-card">
+                        <div class="portfolio-card-header">
+                            <h3>Digitalización Hostelería</h3>
+                            <p>Proyecto Google - 2024</p>
+                        </div>
+                        <div class="portfolio-card-content">
+                            <p>Proyecto de transformación digital en el sector hostelero mediante implementación de menús digitales.</p>
+                            
+                            <p><strong>Responsabilidades:</strong></p>
+                            <ul style="list-style: disc; padding-left: 20px; margin: 1rem 0;">
+                                <li>Análisis de requisitos del cliente</li>
+                                <li>Gestión de stakeholders</li>
+                                <li>Planificación y seguimiento del proyecto</li>
+                                <li>Implementación de metodologías PM</li>
+                            </ul>
+                            
+                            <p><strong>Certificación:</strong> Google Project Management Professional Certificate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact">
+            <div class="container">
+                <h2 class="section-title" style="color: white;">Contacto</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>¡Hablemos!</h3>
+                        <p style="margin-bottom: 2rem;">
+                            Estoy siempre abierto a nuevas oportunidades y proyectos desafiantes. 
+                            Si buscas un Product Owner con experiencia demostrada en transformación 
+                            digital y metodologías Agile, me encantaría conocer más sobre tu proyecto.
+                        </p>
+                        
+                        <div class="contact-item">
+                            <span class="icon">📧</span>
+                            <span>erevenga@gmail.com</span>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <span class="icon">📱</span>
+                            <span>+34-619894420</span>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <span class="icon">🔗</span>
+                            <span>linkedin.com/in/erevenga</span>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <span class="icon">📍</span>
+                            <span>Valencia, España</span>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <h3>Envíame un mensaje</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Nombre</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject">Asunto</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Mensaje</label>
+                                <textarea id="message" name="message" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Mensaje</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Active navigation highlighting
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('.section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Form submission (basic client-side handling)
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Gracias por tu mensaje. Te contactaré pronto!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
